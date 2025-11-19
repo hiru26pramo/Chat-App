@@ -3,6 +3,7 @@ import socket
 import threading
 import datetime
 from PIL import Image,ImageFilter
+import tkinter.messagebox as messagebox
 
 # ---------------- GLOBAL VARIABLES ----------------
 client = None
@@ -71,8 +72,12 @@ def open_chat(username):
     USERNAME = username
 
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect(("13.49.238.62", 5000))
-
+    try:
+        client.connect(("13.49.238.62", 5000))
+    except Exception as e:
+        messagebox.showerror("Connection Error",
+                             f"Cannot connect to the server.\nPlease make sure the server is running.\n\nError: {e}")
+        return
     chat = ctk.CTkToplevel(root)
     chat.geometry("400x600")
     chat.title(f"ChatMe - {USERNAME}")
@@ -144,3 +149,5 @@ def login_action():
 ctk.CTkButton(login, text="Join Chat", width=300, height=40,corner_radius=10, command=login_action).pack(pady=15)
 
 root.mainloop()
+
+
