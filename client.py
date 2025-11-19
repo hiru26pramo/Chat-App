@@ -71,7 +71,7 @@ def open_chat(username):
     USERNAME = username
 
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect(("127.0.0.1", 5000))
+    client.connect(("13.49.238.62", 5000))
 
     chat = ctk.CTkToplevel(root)
     chat.geometry("400x600")
@@ -96,14 +96,6 @@ def open_chat(username):
     scrolls.pack(pady=(5, 0))
     scrolls.lift()
 
-     # ---- BACKGROUND----
-    # bg = ctk.CTkImage(Image.open("background.png"), size=(400, 600))
-    # background_label = ctk.CTkLabel(scrolls, image=bg, text="",)
-    # background_label.place(x=0, y=0, relwidth=1, relheight=1)
-    # background_label.anchor("center")
-    # background_label.lift()
-
-    # ---- TEXTBOX + SEND BUTTON ----
     frame = ctk.CTkFrame(chat)
     frame.pack(pady=5)
     frame.lift()
@@ -129,13 +121,11 @@ def open_chat(username):
 
     # ---- START RECEIVE THREAD ----
     threading.Thread(target=receive_messages, args=(scrolls,), daemon=True).start()
-
-
 # ---------------- LOGIN WINDOW ----------------
 login = ctk.CTkToplevel(root)
 login.geometry("400x600")
 login.title("Login")
-bg = ctk.CTkImage(Image.open("background.png"), size=(400, 400))
+bg = ctk.CTkImage(Image.open("Chat-App/resources/background.png"), size=(400, 400))
 
 background_label = ctk.CTkLabel(login, image=bg, text="")
 background_label.place(x=0, y=0, relwidth=1, relheight=0.8)
